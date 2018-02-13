@@ -1,36 +1,52 @@
-# apollo-tutorial-kit
-
-Starting point for the Apollo GraphQL Server tutorial.
-
-Follow along with the tutorial in the blog post: [How to build a GraphQL server](https://medium.com/apollo-stack/tutorial-building-a-graphql-server-cddaa023c035#.wy5h1htxs). If you want to skip ahead to the solution, check out the [server-tutorial-solution](https://github.com/apollographql/apollo-tutorial-kit/tree/server-tutorial-solution) branch of this repo.
-
-Up-to-date documentation and explanations can be found in the [Apollo Server docs](https://www.apollographql.com/docs/apollo-server/)
+This is an Apollo GraphQL (node.js express) Server. It contains a sample GraphQL schema and data models. It is connected to a mysql database via ssh and performs sample records creation and queries. It serves a GraphiQL UI where GraphQL queries can be entered and results displayed.
 
 ## Getting started
 
-```bash
-git clone https://github.com/apollostack/apollo-starter-kit
-cd apollo-starter-kit
+Install node.js (current version).
+
+Build ssl tunnel to the database host :
+ssh -NL 33060:localhost:3306 74.217.68.77 -l dynavisor
+enter the following password when prompted: dynaViSoR@SPArx
+
+Open up a new session (window)
+git clone https://github.com/leima888/graphql.git
+cd [whereTheProjectIsCloned]
 npm install
 npm start
-```
 
-Then open [http://localhost:3000/graphiql](http://localhost:3000/graphiql)
+
+Then open http://localhost:3000/graphiql using a browser
 
 When you paste this on the left side of the page:
 
-```graphql
 {
-  testString
+  author(firstName: "Giuseppe", lastName: "Hyatt") {
+    firstName
+    lastName
+    posts {
+      title
+    }
+  }
 }
-```
 
 and hit the play button (cmd-return), then you should get this on the right side:
 
-```json
 {
   "data": {
-    "testString": "It works!"
+    "author": {
+      "firstName": "Giuseppe",
+      "lastName": "Hyatt",
+      "posts": [
+        {
+          "title": "A post by Giuseppe"
+        }
+      ]
+    }
   }
 }
-```
+
+The main entry point of the server is server.js. For schema, models and resolvers, look in the data folder (schema.js, connectors.js and resolvers.js).
+
+
+
+
