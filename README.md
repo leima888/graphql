@@ -6,7 +6,7 @@ Install node.js (current version).
 
 Build ssl tunnel to the database host :
 ssh -NL 33060:localhost:3306 74.217.68.77 -l dynavisor
-enter the following password when prompted: dynaViSoR@SPArx
+enter your password when prompted.
 
 Open up a new session (window)
 git clone https://github.com/leima888/graphql.git
