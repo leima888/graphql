@@ -18,7 +18,7 @@ npm start
 Then open http://localhost:3000/graphiql using a browser
 
 Then you can paste the queries (one at a time) on the left side of the page
-and hit the play button (cmd-return) to see the results on the right side:
+and hit the play button (cmd-return) to see the results on the right side.
 
 The main entry point of the server is server.js. For schema, models and resolvers, look in the data folder (schema.js, connectors.js and resolvers.js).
 
