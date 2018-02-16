@@ -1,0 +1,55 @@
+
+{
+  sample(sample_id: "0065bfd9-e1b9-43a8-9379-9658ba") {
+  sample_id
+  project_id
+  submitter_id
+  sample_type
+  case {
+  case_id
+  project_id
+  }
+  }
+}
+
+{
+  allSamples {
+  sample_id
+  project_id
+  submitter_id
+  sample_type
+  case {
+  case_id
+  project_id
+  }
+  }
+}
+
+{
+  case(case_id: "01BR001") {
+  case_id
+  project_id
+  submitter_id
+  days_to_lost_to_followup
+  disease_type
+  index_date
+  samples {
+	sample_id
+	sample_type
+	}
+   }
+}
+{
+  allCases {
+  case_id
+  project_id
+  submitter_id
+  days_to_lost_to_followup
+  disease_type
+  index_date
+  samples {
+	sample_id
+	sample_type
+	}
+   }
+}

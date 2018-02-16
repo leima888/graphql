@@ -1,25 +1,18 @@
-import { Author, View } from './connectors';
+import { Case, Sample } from './connectors';
 
 const resolvers = {
   Query: {
-    author(_, args) {
-      return Author.find({ where: args });
+    sample(_, args) {
+      return Sample.find({ where: args, include: [Case] });
     },
-    allAuthors(_, args) {
-      return Author.findAll();
-    }
-  },
-  Author: {
-    posts(author) {
-      return author.getPosts();
-    }
-  },
-  Post: {
-    author(post) {
-      return post.getAuthor();
+    allSamples(_, args) {
+      return Sample.findAll({ include: [Case]  });
     },
-    views(post) {
-      return View.findOne({ postId: post.id }).then(view => view.views);
+    case(_, args) {
+      return Case.find({ where: args, include: [Sample]  });
+    },
+    allCases(_, args) {
+      return Case.findAll({ include: [Sample]  });
     }
   }
 };

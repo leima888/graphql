@@ -8,36 +8,38 @@ const db = new Sequelize('pdc', 'pdc', 'PdcN0d3647', {
   port: 33060
 });
 
-const AuthorModel = db.define('author', {
-  firstName: { type: Sequelize.STRING },
-  lastName: { type: Sequelize.STRING },
+const CaseModel = db.define('case', {
+  case_id: { type: Sequelize.STRING,
+				primaryKey: true   },
+  project_id: { type: Sequelize.INTEGER },
+  submitter_id: { type: Sequelize.STRING },
+  days_to_lost_to_followup: { type: Sequelize.INTEGER },
+  disease_type: { type: Sequelize.STRING },
+  index_date: { type: Sequelize.STRING },
+  lost_to_followup: { type: Sequelize.STRING },
+}, {
+	timestamps: false,
+	underscored: true,
+	freezeTableName: true,
+	tableName: 'case'	
 });
-
-const PostModel = db.define('post', {
-  title: { type: Sequelize.STRING },
-  text: { type: Sequelize.STRING },
+const SampleModel = db.define('sample', {
+  sample_id: { 	type: Sequelize.STRING,
+				primaryKey: true  },
+  case_id: { type: Sequelize.STRING },
+  project_id: { type: Sequelize.STRING },
+  submitter_id: { type: Sequelize.STRING },
+  sample_type: { type: Sequelize.STRING },
+}, {
+	timestamps: false,
+	underscored: true,
+	freezeTableName: true,
+	tableName: 'sample'	
 });
+CaseModel.hasMany(SampleModel, {foreignKey: 'case_id'});
+SampleModel.belongsTo(CaseModel, {foreignKey: 'case_id'});
 
-AuthorModel.hasMany(PostModel);
-PostModel.belongsTo(AuthorModel);
+const Case = db.models.case;
+const Sample = db.models.sample;
 
-// create mock data with a seed, so we always get the same
-casual.seed(123);
-db.sync({ force: true }).then(() => {
-  _.times(10, () => {
-    return AuthorModel.create({
-      firstName: casual.first_name,
-      lastName: casual.last_name,
-    }).then((author) => {
-      return author.createPost({
-        title: `A post by ${author.firstName}`,
-        text: casual.sentences(3),
-      });
-    });
-  });
-});
-
-const Author = db.models.author;
-const Post = db.models.post;
-
-export { Author, Post };
+export { Case, Sample };

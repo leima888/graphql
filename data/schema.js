@@ -3,22 +3,27 @@ import resolvers from './resolvers';
 
 const typeDefs = `
 type Query {
-  author(firstName: String, lastName: String): Author
-  allAuthors: [Author]
-  getFortuneCookie: String # we'll use this later
+  case(case_id: String): Case
+  allCases: [Case]
+  sample(sample_id: String): Sample
+  allSamples: [Sample]
 }
-type Author {
-  id: Int
-  firstName: String
-  lastName: String
-  posts: [Post]
+type Case {
+  case_id: String
+  project_id: Int
+  submitter_id: String
+  days_to_lost_to_followup: Int
+  disease_type: String
+  index_date: String
+  lost_to_followup: String
+  samples: [Sample]
 }
-type Post {
-  id: Int
-  title: String
-  text: String
-  views: Int
-  author: Author
+type Sample {
+  sample_id: String
+  project_id: String
+  submitter_id: String
+  sample_type: String
+  case: Case
 }
 `;
 
