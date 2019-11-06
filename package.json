@@ -15,7 +15,7 @@
     "mysql": "^2.15.0",
     "mysql2": "^1.5.2",
     "node-fetch": "^1.7.3",
-    "sequelize": "^4.28.2"
+    "sequelize": "^5.15.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
